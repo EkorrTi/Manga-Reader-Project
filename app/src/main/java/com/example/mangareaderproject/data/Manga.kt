@@ -1,7 +1,9 @@
 package com.example.mangareaderproject.data
 
-import androidx.annotation.StringRes
+import androidx.annotation.DrawableRes
 
 data class Manga(
-    @StringRes val nameStringResourceId: Int,
+    val name: String,
+    val description: String,
+    @DrawableRes val coverImageResourceId: Int,
 )

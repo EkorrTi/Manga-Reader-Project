@@ -7,29 +7,26 @@ import android.view.ViewGroup
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.RecyclerView
-import com.example.mangareaderproject.R
 import com.example.mangareaderproject.adapters.MangaListAdapter
+import com.example.mangareaderproject.databinding.MainFragmentBinding
 
 class MainFragment : Fragment() {
+    private lateinit var binding: MainFragmentBinding
 
-    companion object {
-        fun newInstance() = MainFragment()
-    }
+    companion object { fun newInstance() = MainFragment() }
 
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View {
-        return inflater.inflate(R.layout.main_fragment, container, false)
+        binding = MainFragmentBinding.inflate(layoutInflater)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        val recyclerView: RecyclerView = view.findViewById(R.id.recycler_view)
-
-        recyclerView.layoutManager = GridLayoutManager(this.requireContext(), 2)
-        recyclerView.adapter = MangaListAdapter(this.requireContext(), listOf("Kaifuku jutsushi no yarinaoshi", "Nekota no koto ga ki ni natte kimi ga shikatanai", "Nejimaki Kagyu"))
-        recyclerView.setHasFixedSize(true)
+        binding.recyclerView.layoutManager = GridLayoutManager(this.requireContext(), 2)
+//        binding.recyclerView.adapter = MangaListAdapter(this.requireContext(), viewModel.mangaList)
+        binding.recyclerView.setHasFixedSize(true)
 
         super.onViewCreated(view, savedInstanceState)
     }
@@ -37,7 +34,8 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(MainViewModel::class.java)
+        viewModel = ViewModelProvider(this)[MainViewModel::class.java]
+        binding.recyclerView.adapter = MangaListAdapter(this.requireContext(), viewModel.mangaList)
         // TODO: Use the ViewModel
     }
 
