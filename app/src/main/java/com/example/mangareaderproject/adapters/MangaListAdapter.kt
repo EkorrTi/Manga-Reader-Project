@@ -6,9 +6,11 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
+import androidx.navigation.findNavController
 import androidx.recyclerview.widget.RecyclerView
 import com.example.mangareaderproject.R
 import com.example.mangareaderproject.data.Manga
+import com.example.mangareaderproject.ui.main.MainFragmentDirections
 
 class MangaListAdapter(private val context: Context, private val dataset: List<Manga>) : RecyclerView.Adapter<MangaListAdapter.MangaListViewHolder>() {
 
@@ -22,6 +24,10 @@ class MangaListAdapter(private val context: Context, private val dataset: List<M
     override fun onBindViewHolder(holder: MangaListViewHolder, position: Int) {
         holder.coverImage.setImageResource( dataset[position].coverImageResourceId )
         holder.titleName.text = dataset[position].name
+        holder.coverImage.setOnClickListener {
+            val action = MainFragmentDirections.actionMainFragmentToMangaPageFragment(manga = dataset[position], name = dataset[position].name)
+            holder.itemView.findNavController().navigate(action)
+        }
     }
 
     override fun getItemCount(): Int {

@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name" translatable="false">Yomu</string>
+    <string name="library" translatable="true">Library</string>
+    <string name="manga_page" translatable="false">{name}</string>
 </resources>

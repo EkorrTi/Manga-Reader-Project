@@ -1,9 +1,12 @@
 package com.example.mangareaderproject.data
 
 import androidx.annotation.DrawableRes
+import java.io.Serializable
 
-data class Manga(
+
+class Manga(
     val name: String,
     val description: String,
-    @DrawableRes val coverImageResourceId: Int,
-)
+    @DrawableRes val coverImageResourceId: Int
+    ) : Serializable {
+}

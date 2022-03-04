@@ -13,8 +13,6 @@ import com.example.mangareaderproject.databinding.MainFragmentBinding
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
 
-    companion object { fun newInstance() = MainFragment() }
-
     private lateinit var viewModel: MainViewModel
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
@@ -25,7 +23,6 @@ class MainFragment : Fragment() {
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.recyclerView.layoutManager = GridLayoutManager(this.requireContext(), 2)
-//        binding.recyclerView.adapter = MangaListAdapter(this.requireContext(), viewModel.mangaList)
         binding.recyclerView.setHasFixedSize(true)
 
         super.onViewCreated(view, savedInstanceState)
@@ -36,7 +33,6 @@ class MainFragment : Fragment() {
         super.onActivityCreated(savedInstanceState)
         viewModel = ViewModelProvider(this)[MainViewModel::class.java]
         binding.recyclerView.adapter = MangaListAdapter(this.requireContext(), viewModel.mangaList)
-        // TODO: Use the ViewModel
     }
 
 }
