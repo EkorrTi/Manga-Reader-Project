@@ -21,7 +21,7 @@
         tools:layout="@layout/manga_page_fragment">
         <argument
             android:name="manga"
-            app:argType="com.example.mangareaderproject.data.Manga" />
+            app:argType="com.example.mangareaderproject.data.MangaBare" />
         <argument
             android:name="name"
             app:argType="string"
