@@ -23,6 +23,7 @@ class MangaPageFragment : Fragment() {
         }
 
         viewModel.getManga(manga.manga_id)
+        viewModel.getChapters(manga.manga_id)
     }
 
     override fun onCreateView(
@@ -36,7 +37,7 @@ class MangaPageFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         binding.mangaCoverImage.setImageResource( manga.coverImageResourceId )
 
-        viewModel.response.observe(viewLifecycleOwner,{
+        viewModel.mangaResponse.observe(viewLifecycleOwner,{
             binding.mangaNameText.text = it.data.attributes.title.en
             binding.mangaDescriptionText.text = it.data.attributes.description.en
         })
