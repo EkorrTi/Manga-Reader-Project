@@ -5,26 +5,17 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.ViewModelProvider
-import com.example.mangareaderproject.R
+import androidx.fragment.app.viewModels
+import com.example.mangareaderproject.databinding.ReaderFragmentBinding
 
 class ReaderFragment : Fragment() {
+    private lateinit var binding: ReaderFragmentBinding
 
-    companion object {
-        fun newInstance() = ReaderFragment()
-    }
-
-    private lateinit var viewModel: ReaderViewModel
+    private val viewModel: ReaderViewModel by viewModels()
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
-                              savedInstanceState: Bundle?): View? {
-        return inflater.inflate(R.layout.reader_fragment, container, false)
+                              savedInstanceState: Bundle?): View {
+        binding = ReaderFragmentBinding.inflate(layoutInflater)
+        return binding.root
     }
-
-    override fun onActivityCreated(savedInstanceState: Bundle?) {
-        super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProvider(this).get(ReaderViewModel::class.java)
-        // TODO: Use the ViewModel
-    }
-
 }

@@ -26,5 +26,13 @@
             android:name="name"
             app:argType="string"
             android:defaultValue="Oops" />
+        <action
+            android:id="@+id/action_mangaPageFragment_to_readerFragment"
+            app:destination="@id/readerFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/readerFragment"
+        android:name="com.example.mangareaderproject.ui.reader.ReaderFragment"
+        android:label="reader_fragment"
+        tools:layout="@layout/reader_fragment" />
 </navigation>

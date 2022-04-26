@@ -1,10 +1,7 @@
 package com.example.mangareaderproject.data.api
 
-import com.squareup.moshi.JsonClass
-
-@JsonClass(generateAdapter = true)
 data class ApiMangaResponse(
-    val data: Data,
+    val data: Manga,
     val response: String,
     val result: String
 )

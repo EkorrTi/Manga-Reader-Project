@@ -1,6 +1,6 @@
 package com.example.mangareaderproject.data.api
 
-data class RelationshipAttribute(
+data class CoverAttribute(
     val createdAt: String,
     val description: String,
     val fileName: String,

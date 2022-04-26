@@ -1,8 +1,8 @@
 package com.example.mangareaderproject.data.api
 
-data class Relationship(
+data class CoverRelationship(
     val id: String,
     val type: String,
-    val attributes: RelationshipAttribute?,
+    val attributes: CoverAttribute?,
     val related: String?
 )
