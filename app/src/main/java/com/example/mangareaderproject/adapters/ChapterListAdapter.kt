@@ -14,8 +14,13 @@ import java.text.SimpleDateFormat
 /**
  * Adapter for a List of Chapters
  */
-class ChapterListAdapter(private val data: List<Chapter>): RecyclerView.Adapter<ChapterListAdapter.ChapterListViewHolder>() {
-    var onClick:((Chapter) -> Unit)? = null
+class ChapterListAdapter : RecyclerView.Adapter<ChapterListAdapter.ChapterListViewHolder>() {
+    var onClick: ((Chapter) -> Unit)? = null
+    var data: List<Chapter> = emptyList()
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ChapterListViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
@@ -31,7 +36,8 @@ class ChapterListAdapter(private val data: List<Chapter>): RecyclerView.Adapter<
             data[position].attributes.chapter,
             data[position].attributes.title
         )
-        val scanGroupRel: ScanlationGroupRelationship? = data[position].relationships.find { it.type == "scanlation_group" }
+        val scanGroupRel: ScanlationGroupRelationship? =
+            data[position].relationships.find { it.type == "scanlation_group" }
         var scanGroup = ""
         if (scanGroupRel != null)
             scanGroup = scanGroupRel.attributes.name
@@ -48,7 +54,7 @@ class ChapterListAdapter(private val data: List<Chapter>): RecyclerView.Adapter<
 
     override fun getItemCount(): Int = data.size
 
-    class ChapterListViewHolder(view: View): RecyclerView.ViewHolder(view){
+    class ChapterListViewHolder(view: View) : RecyclerView.ViewHolder(view) {
         val chapterTitle: TextView = view.findViewById(R.id.chapter_title)
         val chapterExtra: TextView = view.findViewById(R.id.chapter_extra_info)
     }

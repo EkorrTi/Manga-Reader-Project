@@ -28,7 +28,7 @@ class MainFragment : Fragment() {
         binding.recyclerView.layoutManager = GridLayoutManager(this.requireContext(), 2)
         binding.recyclerView.setHasFixedSize(true)
 
-        val adapter = MangaListAdapter(this.requireContext(), viewModel.mangaList)
+        val adapter = MangaListAdapter(viewModel.mangaList)
         adapter.onClick = {
             val action = MainFragmentDirections.actionMainFragmentToMangaPageFragment(
                 manga = it,

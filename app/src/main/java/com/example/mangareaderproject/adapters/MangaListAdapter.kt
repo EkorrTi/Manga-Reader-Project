@@ -1,6 +1,5 @@
 package com.example.mangareaderproject.adapters
 
-import android.content.Context
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -10,7 +9,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.mangareaderproject.R
 import com.example.mangareaderproject.data.MangaBare
 
-class MangaListAdapter(private val context: Context, private val dataset: List<MangaBare>) : RecyclerView.Adapter<MangaListAdapter.MangaListViewHolder>() {
+class MangaListAdapter(private val data: List<MangaBare>) : RecyclerView.Adapter<MangaListAdapter.MangaListViewHolder>() {
 
     var onClick:((MangaBare) -> Unit)? = null
 
@@ -22,12 +21,12 @@ class MangaListAdapter(private val context: Context, private val dataset: List<M
     }
 
     override fun onBindViewHolder(holder: MangaListViewHolder, position: Int) {
-        holder.coverImage.setImageResource( dataset[position].coverImageResourceId )
-        holder.titleName.text = dataset[position].name
-        holder.coverImage.setOnClickListener { onClick?.invoke(dataset[position]) }
+        holder.coverImage.setImageResource( data[position].coverImageResourceId )
+        holder.titleName.text = data[position].name
+        holder.coverImage.setOnClickListener { onClick?.invoke(data[position]) }
     }
 
-    override fun getItemCount(): Int = dataset.size
+    override fun getItemCount(): Int = data.size
 
     class MangaListViewHolder(view: View) :RecyclerView.ViewHolder(view){
         val coverImage: ImageView = view.findViewById(R.id.list_cover_image)

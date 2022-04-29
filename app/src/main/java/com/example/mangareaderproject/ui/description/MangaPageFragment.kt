@@ -38,14 +38,13 @@ class MangaPageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        var adapter: ChapterListAdapter
+        binding.chaptersList.adapter = ChapterListAdapter()
 
         viewModel.chapters.observe(viewLifecycleOwner,{ list ->
-            adapter = ChapterListAdapter(list)
-            adapter.onClick = {
+            (binding.chaptersList.adapter as ChapterListAdapter).data = list
+            (binding.chaptersList.adapter as ChapterListAdapter).onClick = {
                 Toast.makeText(requireContext(), "${it.attributes.chapter} + ${it.attributes.title}", Toast.LENGTH_SHORT).show()
             }
-            binding.chaptersList.adapter = adapter
         })
 
         binding.mangaCoverImage.setImageResource( manga.coverImageResourceId )
