@@ -1,11 +1,13 @@
 package com.example.mangareaderproject.data.api
 
+import com.google.gson.annotations.SerializedName
+
 data class CoverAttribute(
-    val createdAt: String,
+    @SerializedName("createdAt") val createdAt: String,
     val description: String,
-    val fileName: String,
+    @SerializedName("fileName") val fileName: String,
     val locale: String,
-    val updatedAt: String,
+    @SerializedName("updatedAt") val updatedAt: String,
     val version: Int,
     val volume: String
 )
