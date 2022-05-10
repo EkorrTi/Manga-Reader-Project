@@ -17,6 +17,7 @@ import java.text.SimpleDateFormat
 class ChapterListAdapter : RecyclerView.Adapter<ChapterListAdapter.ChapterListViewHolder>() {
     var onClick: ((Chapter) -> Unit)? = null
     var data: List<Chapter> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
         set(value) {
             field = value
             notifyDataSetChanged()
@@ -31,23 +32,27 @@ class ChapterListAdapter : RecyclerView.Adapter<ChapterListAdapter.ChapterListVi
 
     @SuppressLint("SimpleDateFormat")
     override fun onBindViewHolder(holder: ChapterListViewHolder, position: Int) {
+        // Insert text for chapter number and title
         holder.chapterTitle.text = holder.itemView.resources.getString(
             R.string.chapter_title,
             data[position].attributes.chapter,
             data[position].attributes.title
         )
+
+        // Get scanlation group if available
         val scanGroupRel: ScanlationGroupRelationship? =
             data[position].relationships.find { it.type == "scanlation_group" }
         var scanGroup = ""
         if (scanGroupRel != null)
             scanGroup = scanGroupRel.attributes.name
 
-
+        // Insert text for chapter date and scanlation group
         holder.chapterExtra.text = holder.itemView.resources.getString(
             R.string.chapter_extra,
             SimpleDateFormat("dd/MM/yyyy").format(data[position].attributes.publishAt),
             scanGroup
         )
+
 
         holder.itemView.setOnClickListener { onClick?.invoke(data[position]) }
     }

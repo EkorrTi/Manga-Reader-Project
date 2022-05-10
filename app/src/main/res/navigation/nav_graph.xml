@@ -34,5 +34,9 @@
         android:id="@+id/readerFragment"
         android:name="com.example.mangareaderproject.ui.reader.ReaderFragment"
         android:label="reader_fragment"
-        tools:layout="@layout/reader_fragment" />
+        tools:layout="@layout/reader_fragment" >
+        <argument
+            android:name="chapter_id"
+            app:argType="string" />
+    </fragment>
 </navigation>

@@ -20,7 +20,7 @@ class MangaPageViewModel : ViewModel() {
 
     // The external immutable LiveData for the request status
     val mangaResponse: LiveData<ApiMangaResponse> = _response
-    val chapters: MutableLiveData<List<Chapter>> = _chapters
+    val chapters: LiveData<List<Chapter>> = _chapters
 
     fun getManga(id: String){
         viewModelScope.launch {
