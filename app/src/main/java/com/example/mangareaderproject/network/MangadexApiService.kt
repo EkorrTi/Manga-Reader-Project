@@ -2,6 +2,7 @@ package com.example.mangareaderproject.network
 
 import com.example.mangareaderproject.data.api.ApiAtHomeResponse
 import com.example.mangareaderproject.data.api.ApiChaptersResponse
+import com.example.mangareaderproject.data.api.ApiFeedResponse
 import com.example.mangareaderproject.data.api.ApiMangaResponse
 import com.google.gson.FieldNamingPolicy
 import com.google.gson.GsonBuilder
@@ -9,6 +10,7 @@ import retrofit2.Retrofit
 import retrofit2.converter.gson.GsonConverterFactory
 import retrofit2.http.GET
 import retrofit2.http.Path
+import retrofit2.http.Query
 
 private const val BASE_URL = "https://api.mangadex.org"
 //var BASE_URL_CHAPTERS = ""//"https://uploads.mangadex.org"
@@ -24,7 +26,14 @@ private val retrofit = Retrofit.Builder()
     .build()
 
 interface MangadexApiService {
-    @GET("/manga/{manga_id}")
+    @GET("/manga")
+    suspend fun getFeedMangas(
+        @Query("ids[]") ids: List<String>? = null,
+        @Query("limit") limit: Int? = null,
+        @Query("includes[]") includes: List<String>? = listOf("cover_art")
+    ): ApiFeedResponse
+
+    @GET("/manga/{manga_id}?includes[]=cover_art")
     suspend fun getManga(@Path("manga_id") id: String): ApiMangaResponse
 
     @GET("/manga/{manga_id}/feed?translatedLanguage[]=en&limit=500&order%5Bvolume%5D=asc&order%5Bchapter%5D=asc&includes[]=scanlation_group")

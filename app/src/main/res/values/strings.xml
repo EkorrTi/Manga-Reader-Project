@@ -4,4 +4,6 @@
     <string name="manga_page" translatable="false">{name}</string>
     <string name="chapter_title" translatable="false">Ch.%1$s - %2$s</string>
     <string name="chapter_extra" translatable="false">%1$s * %2$s</string>
+    <string name="chapter_count" translatable="false">%1$d chapters</string>
+    <string name="explore">Explore</string>
 </resources>

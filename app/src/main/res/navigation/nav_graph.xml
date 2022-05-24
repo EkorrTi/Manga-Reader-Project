@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_mainFragment_to_mangaPageFragment"
             app:destination="@id/mangaPageFragment" />
+        <action
+            android:id="@+id/action_mainFragment_to_exploreFragment"
+            app:destination="@id/exploreFragment" />
     </fragment>
     <fragment
         android:id="@+id/mangaPageFragment"
@@ -21,7 +24,7 @@
         tools:layout="@layout/manga_page_fragment">
         <argument
             android:name="manga"
-            app:argType="com.example.mangareaderproject.data.MangaBare" />
+            app:argType="com.example.mangareaderproject.data.api.Manga" />
         <argument
             android:name="name"
             app:argType="string"
@@ -38,5 +41,14 @@
         <argument
             android:name="chapter_id"
             app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/exploreFragment"
+        android:name="com.example.mangareaderproject.ui.explore.ExploreFragment"
+        android:label="explore_fragment"
+        tools:layout="@layout/explore_fragment" >
+        <action
+            android:id="@+id/action_exploreFragment_to_mangaPageFragment"
+            app:destination="@id/mangaPageFragment" />
     </fragment>
 </navigation>

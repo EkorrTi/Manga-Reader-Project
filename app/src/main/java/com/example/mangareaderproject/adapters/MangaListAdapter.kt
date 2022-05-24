@@ -1,17 +1,25 @@
 package com.example.mangareaderproject.adapters
 
+import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.recyclerview.widget.RecyclerView
+import coil.load
 import com.example.mangareaderproject.R
-import com.example.mangareaderproject.data.MangaBare
+import com.example.mangareaderproject.data.api.Manga
 
-class MangaListAdapter(private val data: List<MangaBare>) : RecyclerView.Adapter<MangaListAdapter.MangaListViewHolder>() {
+class MangaListAdapter : RecyclerView.Adapter<MangaListAdapter.MangaListViewHolder>() {
 
-    var onClick:((MangaBare) -> Unit)? = null
+    var onClick:((Manga) -> Unit)? = null
+    var data: List<Manga> = emptyList()
+        @SuppressLint("NotifyDataSetChanged")
+        set(value) {
+            field = value
+            notifyDataSetChanged()
+        }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): MangaListViewHolder {
         val adapterLayout = LayoutInflater.from(parent.context)
@@ -21,8 +29,8 @@ class MangaListAdapter(private val data: List<MangaBare>) : RecyclerView.Adapter
     }
 
     override fun onBindViewHolder(holder: MangaListViewHolder, position: Int) {
-        holder.coverImage.setImageResource( data[position].coverImageResourceId )
-        holder.titleName.text = data[position].name
+        holder.coverImage.load("https://uploads.mangadex.org/covers/${data[position].id}/${data[position].relationships.first{ rel -> rel.type == "cover_art" }.attributes?.fileName}.256.jpg")
+        holder.titleName.text = data[position].attributes.title.en
         holder.coverImage.setOnClickListener { onClick?.invoke(data[position]) }
     }
 
