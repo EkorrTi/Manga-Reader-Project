@@ -7,10 +7,11 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.LinearLayoutManager
 import coil.load
+import com.example.mangareaderproject.MangaReaderProjectApplication
 import com.example.mangareaderproject.R
 import com.example.mangareaderproject.adapters.ChapterListAdapter
 import com.example.mangareaderproject.data.api.Manga
@@ -21,7 +22,11 @@ class MangaPageFragment : Fragment() {
     private lateinit var manga: Manga
     private lateinit var binding: MangaPageFragmentBinding
 
-    private val viewModel: MangaPageViewModel by viewModels()
+    private val viewModel: MangaPageViewModel by activityViewModels{
+        MangaPageViewModelFactory(
+            (activity?.application as MangaReaderProjectApplication).database.mangaDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -39,7 +44,22 @@ class MangaPageFragment : Fragment() {
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (activity?.findViewById<BottomNavigationView>(R.id.bottom_nav))?.visibility = View.GONE
+        binding.addToLibraryButton.setOnClickListener {
+            viewModel.saveToLibrary(manga.id)
+            binding.removeFromLibraryButton.visibility = View.VISIBLE
+            binding.addToLibraryButton.visibility = View.GONE
+        }
+
+        binding.removeFromLibraryButton.setOnClickListener {
+            viewModel.delete(manga.id)
+            binding.removeFromLibraryButton.visibility = View.GONE
+            binding.addToLibraryButton.visibility = View.VISIBLE
+        }
+
+        if ( viewModel.getById(manga.id)?.id == manga.id) {
+            binding.removeFromLibraryButton.visibility = View.VISIBLE
+            binding.addToLibraryButton.visibility = View.GONE
+        }
 
         val adapter = ChapterListAdapter()
         adapter.onClick = {
@@ -57,7 +77,6 @@ class MangaPageFragment : Fragment() {
         //llm.reverseLayout = true
         binding.chaptersList.layoutManager = llm
 
-
         binding.mangaNameText.text = manga.attributes.title.en
         binding.mangaDescriptionText.text = manga.attributes.description.en
 
@@ -66,5 +85,10 @@ class MangaPageFragment : Fragment() {
 
         Log.i("coverUrl", coverUrl)
         binding.mangaCoverImage.load(coverUrl)
+    }
+
+    override fun onResume() {
+        (activity?.findViewById<BottomNavigationView>(R.id.bottom_nav))?.visibility = View.GONE
+        super.onResume()
     }
 }

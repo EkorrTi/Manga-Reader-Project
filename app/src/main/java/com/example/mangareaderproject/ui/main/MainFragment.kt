@@ -7,9 +7,10 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.core.os.bundleOf
 import androidx.fragment.app.Fragment
-import androidx.fragment.app.viewModels
+import androidx.fragment.app.activityViewModels
 import androidx.navigation.Navigation
 import androidx.recyclerview.widget.GridLayoutManager
+import com.example.mangareaderproject.MangaReaderProjectApplication
 import com.example.mangareaderproject.R
 import com.example.mangareaderproject.adapters.MangaListAdapter
 import com.example.mangareaderproject.databinding.MainFragmentBinding
@@ -17,12 +18,15 @@ import com.google.android.material.bottomnavigation.BottomNavigationView
 
 class MainFragment : Fragment() {
     private lateinit var binding: MainFragmentBinding
-
-    private val viewModel: MainViewModel by viewModels()
+    private val viewModel: MainViewModel by activityViewModels{
+        MainViewModelFactory(
+            (activity?.application as MangaReaderProjectApplication).database.mangaDao()
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        viewModel.getFeed(viewModel.exampleIdsList)
+        viewModel.getFeed( viewModel.getUsersManga().map { me -> me.id } )
     }
 
     override fun onCreateView(
@@ -35,8 +39,6 @@ class MainFragment : Fragment() {
 
     @SuppressLint("NotifyDataSetChanged")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
-        (activity?.findViewById<BottomNavigationView>(R.id.bottom_nav))?.visibility = View.VISIBLE
-
         binding.libraryRecyclerView.layoutManager = GridLayoutManager(this.requireContext(), 2)
         binding.libraryRecyclerView.setHasFixedSize(true)
 
@@ -52,5 +54,11 @@ class MainFragment : Fragment() {
         }
 
         super.onViewCreated(view, savedInstanceState)
+    }
+
+    override fun onResume() {
+        (activity?.findViewById<BottomNavigationView>(R.id.bottom_nav))?.visibility = View.VISIBLE
+        viewModel.getFeed( viewModel.getUsersManga().map { me -> me.id } )
+        super.onResume()
     }
 }

@@ -4,7 +4,9 @@
     <option name="filePathToZoomLevelMap">
       <map>
         <entry key="..\:/Users/balag/AndroidStudioProjects/MangaReaderProject/app/src/main/res/drawable/darkened_gradient.xml" value="0.226" />
+        <entry key="..\:/Users/balag/AndroidStudioProjects/MangaReaderProject/app/src/main/res/drawable/in_library_gradient.xml" value="0.226" />
         <entry key="..\:/Users/balag/AndroidStudioProjects/MangaReaderProject/app/src/main/res/layout/explore_fragment.xml" value="0.36666666666666664" />
+        <entry key="..\:/Users/balag/AndroidStudioProjects/MangaReaderProject/app/src/main/res/layout/fragment_login.xml" value="0.35260416666666666" />
         <entry key="..\:/Users/balag/AndroidStudioProjects/MangaReaderProject/app/src/main/res/layout/main_activity.xml" value="0.36102564102564105" />
         <entry key="..\:/Users/balag/AndroidStudioProjects/MangaReaderProject/app/src/main/res/layout/main_fragment.xml" value="0.240625" />
         <entry key="..\:/Users/balag/AndroidStudioProjects/MangaReaderProject/app/src/main/res/layout/manga_list_item.xml" value="0.240625" />

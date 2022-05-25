@@ -1,16 +1,15 @@
 package com.example.mangareaderproject.ui.description
 
 import android.util.Log
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
+import com.example.mangareaderproject.data.MangaEntity
 import com.example.mangareaderproject.data.api.ApiChaptersResponse
 import com.example.mangareaderproject.data.api.Chapter
 import com.example.mangareaderproject.network.MangadexApi
+import com.example.mangareaderproject.room.MangaDao
 import kotlinx.coroutines.launch
 
-class MangaPageViewModel : ViewModel() {
+class MangaPageViewModel(private val mangaDao: MangaDao) : ViewModel() {
     // The internal MutableLiveData that stores the status of the most recent request
     private val _chapters = MutableLiveData<List<Chapter>>()
     private lateinit var chaptersResponse: ApiChaptersResponse
@@ -29,5 +28,21 @@ class MangaPageViewModel : ViewModel() {
             Log.i("Mangadex Chapters Response", chaptersResponse.toString())
             _chapters.value = chaptersResponse.data
         }
+    }
+
+    fun saveToLibrary(id: String) = mangaDao.save(MangaEntity(id))
+    fun getById(id: String) = mangaDao.getById(id)
+    fun delete(id: String) = mangaDao.delete(id)
+}
+
+class MangaPageViewModelFactory(
+    private val mangaDao: MangaDao
+) : ViewModelProvider.Factory {
+    override fun <T : ViewModel> create(modelClass: Class<T>): T {
+        if (modelClass.isAssignableFrom(MangaPageViewModel::class.java)) {
+            @Suppress("UNCHECKED_CAST")
+            return MangaPageViewModel(mangaDao) as T
+        }
+        throw IllegalArgumentException("Unknown ViewModel class")
     }
 }

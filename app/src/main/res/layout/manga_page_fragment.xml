@@ -37,6 +37,29 @@
             app:layout_constraintTop_toTopOf="@+id/manga_cover_image"
             tools:text="Chainsaw Man" />
 
+        <Button
+            android:id="@+id/add_to_library_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/add_to_library"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintWidth_max="200dp"
+            app:layout_constraintStart_toEndOf="@+id/manga_cover_image"
+            app:layout_constraintTop_toBottomOf="@+id/manga_name_text" />
+
+        <Button
+            android:id="@+id/remove_from_library_button"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@string/remove_from_library"
+            android:visibility="gone"
+            android:layout_marginTop="80dp"
+            android:layout_marginLeft="20dp"
+            app:layout_constraintWidth_max="200dp"
+            app:layout_constraintStart_toEndOf="@+id/manga_cover_image"
+            app:layout_constraintTop_toBottomOf="@+id/manga_name_text" />
+
         <TextView
             android:id="@+id/manga_description_text"
             android:layout_width="match_parent"

@@ -6,4 +6,15 @@
     <string name="chapter_extra" translatable="false">%1$s * %2$s</string>
     <string name="chapter_count" translatable="false">%1$d chapters</string>
     <string name="explore">Explore</string>
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password</string>
+    <string name="action_register">Register</string>
+    <string name="action_sign_in">Sign in</string>
+    <string name="welcome">"Welcome!"</string>
+    <string name="invalid_username">Not a valid username</string>
+    <string name="invalid_password">Password must be >5 characters</string>
+    <string name="login_failed">"Login failed"</string>
+    <string name="add_to_library">Add to library</string>
+    <string name="remove_from_library">Remove from library</string>
 </resources>
