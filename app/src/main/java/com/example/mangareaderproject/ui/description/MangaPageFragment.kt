@@ -33,6 +33,7 @@ class MangaPageFragment : Fragment() {
 
         arguments?.let { manga = it.getSerializable("manga") as Manga }
         viewModel.getChapters(manga.id)
+
     }
 
     override fun onCreateView(
