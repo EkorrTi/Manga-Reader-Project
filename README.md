@@ -1,4 +1,4 @@
 # Manga-Reader-Project
-A manga reader sample app with Mangadex API <br>
-Fetches all info from https://api.mangadex.org REST API, 
-uses <code>LiveData</code>, <code>Navigation Component</code>, <code>Retrofit 2</code> and <code>Coil</code>
+A very simple manga reader app made as a university project <br>
+Fetches all info from https://api.mangadex.org REST API, besides the obvious ones, has functionality to save manga to library <br>
+Uses <code>LiveData</code>, <code>Jetpack Navigation</code>, <code>Retrofit 2</code>, <code>Room</code> and <code>Coil</code>
