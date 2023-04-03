@@ -5,3 +5,5 @@ Uses <code>LiveData</code>, <code>Jetpack Navigation</code>, <code>Retrofit 2</c
 
 Includes 4 fragments Library, Explore, Manga details and Reader  
 Titles can be favorited in Explore, which saves their reference to the Database then viewed in Library fragment
+
+![Alt Text](app/src/main/res/drawable/demo.gif)
